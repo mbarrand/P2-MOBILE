@@ -50,7 +50,7 @@ fun BottomNavBar() {
 
             // Icône droite (avatar)
             Icon(
-                painter = painterResource(id = R.drawable.ic_user), // Change selon ton fichier d'icône
+                painter = painterResource(id = R.drawable.icon_user), // Change selon ton fichier d'icône
                 contentDescription = "User Icon",
                 tint = iconColor,
                 modifier = Modifier.size(24.dp)
