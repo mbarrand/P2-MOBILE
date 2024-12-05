@@ -1,51 +1,37 @@
-package com.example.learnnavigation
+package org.mathieu.sandboxdiiage12027.ui.screens.player
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.mathieu.sandboxdiiage12027.ui.composables.BottomNavBar
+import org.mathieu.sandboxdiiage12027.ui.screens.player.PlayerDashboardViewModel
+import org.mathieu.sandboxdiiage12027.ui.screens.player.Challenge
+import org.mathieu.sandboxdiiage12027.ui.theme.*
 
 @Composable
-fun PlayerDashboardScreen() {
+fun PlayerDashboardScreen(viewModel: PlayerDashboardViewModel = viewModel()) {
+    val uiState by viewModel.uiState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 70.dp) // Place pour la navbar
+            modifier = Modifier.fillMaxSize().background(BackgroundColor)
         ) {
-            // Simule des données pour le moment
-            val userName = "Mattéo"
-            val points = 34
-            val challenges = listOf(
-                Challenge(4, "Découverte des mots de passe", "Dans ce challenge vous devrez répondre aux questions basiques sur les mots de passe..."),
-                Challenge(5, "Reconnaître du phishing", "Dans ce challenge vous allez analyser différents emails et devoir identifier ceux qui contiennent du phishing")
-            )
-
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .weight(1f)
                     .padding(16.dp)
             ) {
                 // Header Section
@@ -55,104 +41,106 @@ fun PlayerDashboardScreen() {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Bienvenue, $userName!",
-                        style = MaterialTheme.typography.headlineSmall, // Remplacement ici
-                        fontWeight = FontWeight.Bold
+                        text = "Bienvenue, ${uiState.userName}!",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = OnBackgroundColor
                     )
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "$points points",
-                            style = MaterialTheme.typography.bodyMedium, // Compatible Material 3
-                            modifier = Modifier.padding(end = 8.dp)
+                            text = "${uiState.points} points",
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.padding(end = 8.dp),
+                            color = OnBackgroundColor
                         )
-                        // Placeholder for the profile picture
                         Box(
                             modifier = Modifier
                                 .size(40.dp)
                                 .clip(CircleShape)
-                                .background(Color.Gray) // Simule une image
+                                .background(TertiaryColor)
                         )
                     }
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                // Separator Line
-                Divider(
-                    color = Color.LightGray,
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 8.dp),
                     thickness = 1.dp,
-                    modifier = Modifier.padding(vertical = 8.dp)
+                    color = TertiaryColor
                 )
 
-                // Title Section
                 Text(
                     text = "Vous pouvez participer à un challenge !",
-                    style = MaterialTheme.typography.titleMedium, // Compatible Material 3
-                    modifier = Modifier.padding(vertical = 8.dp)
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    color = OnBackgroundColor
                 )
 
-                // Challenges List
-                challenges.forEach { challenge ->
+                uiState.challenges.forEach { challenge ->
                     ChallengeCard(challenge)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
+
+            Spacer(modifier = Modifier.height(8.dp))
         }
-        // Navbar placée en bas
-        BottomNavBar()
+
+        BottomNavBar(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+        )
     }
-
-
-
 }
+
+
 
 @Composable
 fun ChallengeCard(challenge: Challenge) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary),
+            .padding(8.dp)
+            .background(PrimaryColor),
         elevation = CardDefaults.elevatedCardElevation(4.dp),
         shape = RoundedCornerShape(8.dp)
     ) {
-        Column(
+        Row( // Utilisation d'une Row pour organiser le contenu horizontalement
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically // Centrage vertical
         ) {
             // Numéro du challenge
             Text(
                 text = "#${challenge.number}",
-                color = Color(0xFFFFA500), // Couleur jaune
+                color = SecondaryColor, // Utilisation du thème
                 fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
-            )
-            // Titre
-            Text(
-                text = challenge.title,
-                color = Color.White,
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                modifier = Modifier.padding(top = 4.dp)
+                modifier = Modifier.padding(end = 16.dp) // Espacement avec le contenu à droite
             )
-            // Description
-            Text(
-                text = challenge.description,
-                color = Color.White.copy(alpha = 0.8f),
-                fontSize = 14.sp,
-                modifier = Modifier.padding(top = 4.dp)
-            )
+
+            // Contenu texte (titre + description)
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                // Titre
+                Text(
+                    text = challenge.title,
+                    color = OnPrimaryColor, // Utilisation du thème
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+                // Description
+                Text(
+                    text = challenge.description,
+                    color = OnPrimaryColor, // Utilisation du thème),
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
         }
     }
 }
-
-// Data class pour simuler un challenge
-data class Challenge(
-    val number: Int,
-    val title: String,
-    val description: String
-)

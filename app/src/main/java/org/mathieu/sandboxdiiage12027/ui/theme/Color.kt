@@ -16,3 +16,7 @@ val BackgroundColor : Color
     @Composable get() = MaterialTheme.colorScheme.background
 val OnBackgroundColor : Color
     @Composable get() = MaterialTheme.colorScheme.onBackground
+val TertiaryColor : Color
+    @Composable get() = MaterialTheme.colorScheme.tertiary
+val OnTertiaryColor : Color
+    @Composable get() = MaterialTheme.colorScheme.onTertiary

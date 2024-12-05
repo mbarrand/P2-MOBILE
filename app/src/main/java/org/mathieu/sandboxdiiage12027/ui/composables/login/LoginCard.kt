@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.mathieu.sandboxdiiage12027.R
+import org.mathieu.sandboxdiiage12027.ui.theme.*
 
 @Composable
 fun LoginCard(
@@ -32,12 +33,10 @@ fun LoginCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(16.dp)
+        .background(PrimaryColor),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary
-        )
+        elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(
             modifier = Modifier
@@ -50,7 +49,7 @@ fun LoginCard(
                 text = "Connexion",
                 style = MaterialTheme.typography.headlineSmall,
                 fontSize = 25.sp,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = OnPrimaryColor
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -59,14 +58,14 @@ fun LoginCard(
             Text(
                 text = "Nom d'utilisateur",
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = OnPrimaryColor
             )
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.background),
+                    .background(BackgroundColor),
                 singleLine = true,
                 placeholder = { Text(text = "Entrez votre nom d'utilisateur") }
             )
@@ -77,14 +76,14 @@ fun LoginCard(
             Text(
                 text = "Mot de passe",
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = OnPrimaryColor
             )
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.background),
+                    .background(BackgroundColor),
                 singleLine = true,
                 visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 placeholder = { Text(text = "Entrez votre mot de passe") },
@@ -107,22 +106,22 @@ fun LoginCard(
                 modifier = Modifier.fillMaxWidth(),
                 enabled = isLoginEnabled,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.secondary,
-                    contentColor = MaterialTheme.colorScheme.onSecondary,
-                    disabledContainerColor = MaterialTheme.colorScheme.secondary,
-                    disabledContentColor = MaterialTheme.colorScheme.onSecondary,
+                    containerColor = SecondaryColor,
+                    contentColor = OnSecondaryColor,
+                    disabledContainerColor = SecondaryColor,
+                    disabledContentColor = OnSecondaryColor,
                 )
             ) {
                 Text(text = "Se connecter")
+            }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = OnPrimaryColor,
                 fontSize = 15.sp,
                 text = "Mot de passe oublié ?"
             )
         }
     }
-}

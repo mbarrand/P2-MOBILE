@@ -19,6 +19,8 @@
     <color name="onPrimary"/>
     <color name="secondary"/>
     <color name="onSecondary"/>
+    <color name="tertiary"/>
+    <color name="onTertiary"/>
     <color name="background"/>
     <color name="onBackground"/>
     <color name="error">@color/bright_red</color>

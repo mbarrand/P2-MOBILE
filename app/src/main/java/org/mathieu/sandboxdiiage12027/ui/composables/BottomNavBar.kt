@@ -1,5 +1,6 @@
 package org.mathieu.sandboxdiiage12027.ui.composables
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -16,17 +17,19 @@ import org.mathieu.sandboxdiiage12027.R
 import org.mathieu.sandboxdiiage12027.ui.theme.*
 
 @Composable
-fun BottomNavBar() {
+fun BottomNavBar(
+    modifier: Modifier = Modifier // Paramètre optionnel pour passer un Modifier
+) {
     // Couleurs et styles de base
     val navBarColor = Color.Black // Fond noir de la navbar
     val iconColor = Color.Gray // Couleur des icônes inactives
-    val homeButtonSize = 60.dp // Taille du bouton maison central
+    val homeButtonSize = 80.dp // Taille du bouton maison central
 
     // Conteneur principal
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .height(70.dp)
+            .height(80.dp)
             .background(navBarColor),
         contentAlignment = Alignment.TopCenter
     ) {
@@ -40,20 +43,20 @@ fun BottomNavBar() {
         ) {
             // Icône gauche (couronne)
             Icon(
-                painter = painterResource(id = R.drawable.icon_crown), // Change selon ton fichier d'icône
+                painter = painterResource(id = R.drawable.icon_crown),
                 contentDescription = "Crown Icon",
                 tint = iconColor,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(30.dp)
             )
 
             Spacer(modifier = Modifier.width(homeButtonSize)) // La place pour le bouton central
 
             // Icône droite (avatar)
             Icon(
-                painter = painterResource(id = R.drawable.icon_user), // Change selon ton fichier d'icône
+                painter = painterResource(id = R.drawable.icon_user),
                 contentDescription = "User Icon",
                 tint = iconColor,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(30.dp)
             )
         }
 
@@ -61,11 +64,13 @@ fun BottomNavBar() {
         Surface(
             color = navBarColor,
             shape = CircleShape,
+
+            border = BorderStroke(6.dp, BackgroundColor),
             modifier = Modifier
                 .size(homeButtonSize)
                 .align(Alignment.Center)
-                .offset(y = -20.dp), // Décalage vers le haut pour ressortir
-            shadowElevation = 4.dp // Ombre pour le bouton maison
+                .offset(y = -30.dp),
+            shadowElevation = 4.dp
         ) {
             Box(
                 modifier = Modifier
@@ -74,10 +79,10 @@ fun BottomNavBar() {
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.icon_home), // Change selon ton fichier d'icône
+                    painter = painterResource(id = R.drawable.icon_home),
                     contentDescription = "Home Icon",
-                    tint = Color.White, // Couleur de la maison
-                    modifier = Modifier.size(30.dp)
+                    tint = Color.White,
+                    modifier = Modifier.size(35.dp)
                 )
             }
         }

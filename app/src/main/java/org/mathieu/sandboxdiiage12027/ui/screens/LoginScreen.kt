@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import org.mathieu.sandboxdiiage12027.R
 import org.mathieu.sandboxdiiage12027.Routes
 import org.mathieu.sandboxdiiage12027.ui.composables.login.LoginCard
+import org.mathieu.sandboxdiiage12027.ui.theme.*
 
 
 @Composable
@@ -24,13 +25,13 @@ fun LoginScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(BackgroundColor)
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
         LoginCard(
             onLoginClick = { username, password ->
-                println(context.getString(R.string.username_password, username, password))
+                println("username: $username, password: $password")
             },
             onNavigate = {
                 navController.navigate(Routes.PlayerDashboard)

@@ -32,7 +32,9 @@ private val DarkColorScheme
         secondary = colorResource(id = R.color.secondary),
         onSecondary = colorResource(id = R.color.onSecondary),
         background = colorResource(id = R.color.background),
-        onBackground = colorResource(id = R.color.onBackground)
+        onBackground = colorResource(id = R.color.onBackground),
+        tertiary = colorResource(id = R.color.tertiary),
+        onTertiary = colorResource(id = R.color.onTertiary)
     )
 
 private val LightColorScheme
@@ -43,14 +45,16 @@ private val LightColorScheme
         secondary = colorResource(id = R.color.secondary),
         onSecondary = colorResource(id = R.color.onSecondary),
         background = colorResource(id = R.color.background),
-        onBackground = colorResource(id = R.color.onBackground)
+        onBackground = colorResource(id = R.color.onBackground),
+        tertiary = colorResource(id = R.color.tertiary),
+        onTertiary = colorResource(id = R.color.onTertiary)
     )
 
 @Composable
 fun LeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    //dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
